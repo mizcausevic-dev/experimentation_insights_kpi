@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Experimentation Insights KPI
+  version: 1.0.0
+  description: >
+    Recruiter-ready API for experiment lift analysis, significance review,
+    rollout decisioning, and KPI-aware growth operations.
+servers:
+  - url: http://localhost:3000
+paths:
+  /health:
+    get:
+      summary: Service health status
+      responses:
+        '200':
+          description: Healthy service response
+  /api/experiments:
+    get:
+      summary: List experiments
+      responses:
+        '200':
+          description: Array of experiment records
+  /api/experiments/{id}:
+    get:
+      summary: Get one experiment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Experiment record
+        '404':
+          description: Experiment not found
+  /api/variants:
+    get:
+      summary: List variants
+      responses:
+        '200':
+          description: Array of variant records
+  /api/kpis:
+    get:
+      summary: List KPI metrics
+      responses:
+        '200':
+          description: Array of KPI records
+  /api/rollouts:
+    get:
+      summary: List rollout decisions
+      responses:
+        '200':
+          description: Array of rollout records
+  /api/findings:
+    get:
+      summary: List insight findings
+      responses:
+        '200':
+          description: Array of insight findings
+  /api/dashboard/summary:
+    get:
+      summary: Dashboard summary
+      responses:
+        '200':
+          description: Aggregate experimentation summary
+  /api/analyze/lift:
+    post:
+      summary: Analyze variant lift
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Lift analysis
+  /api/analyze/significance:
+    post:
+      summary: Analyze significance posture
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Significance analysis
+  /api/analyze/rollout:
+    post:
+      summary: Analyze rollout decisioning
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Rollout analysis
